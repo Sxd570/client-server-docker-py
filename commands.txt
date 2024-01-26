@@ -1,0 +1,14 @@
+# to build the server docker container
+docker build -t equation-server -f Dockerfile.server .
+
+# to build the server docker container
+docker build -t equation-client -f Dockerfile.client .
+
+# Create a bridge network
+sudo docker network create equation-network
+
+# Run the server container in the network
+sudo docker run -d --network equation-network --name equation-server equation-server
+
+# Run the client container in the network
+sudo docker run --network equation-network equation-client {EQUATION}
